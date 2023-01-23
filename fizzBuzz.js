@@ -4,20 +4,18 @@
 // If they happen at the same time the output is FizzBuzz
 
 function fizzBuzz (n) {
-    let array = []
  for(i=1; i<=n; i++){
     if( i%3 == 0 && i%5 == 0 ){
-        array.push('FizzBuzz')
+        console.log('FizzBuzz')
     }
     else if( i%5 == 0 ){
-        array.push( 'Buzz')
+        console.log( 'Buzz')
     }else if ( i%3 == 0 ){
-        array.push( 'Fizz')
+        console.log( 'Fizz')
     }
     else {
-        array.push(i)
+        console.log(i)
     }
  }
-console.log(array)
 }
 fizzBuzz(20)
