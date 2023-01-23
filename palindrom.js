@@ -1,7 +1,8 @@
 // Check Whether a String is Palindrome or Not
 
 function palindrom(string) { 
-    let newString = string.replace(/\s/g, "")  // remove all white spaces
+    let newString = string.replace(/\s/g, "").toLowerCase()  // remove all white spaces
+     //  newString = string.replace(/[^A-Z]/ig, "").toLowerCase() // will remove all other char exept a-z
     let reversedString = newString.split("").reverse().join("")
     if (newString == reversedString) {
         console.log(true)
@@ -10,4 +11,4 @@ function palindrom(string) {
     }
     
 }
-palindrom("ab b a ")
+palindrom("yooy. -2 ")
