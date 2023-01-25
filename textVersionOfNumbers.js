@@ -13,7 +13,8 @@ function numberToText (num) {
     let thousands=[]
     let million=[]
     let reverse = num.toString()
-
+      
+       // splitting numbers
     for(i=0; i<=reverse.length-1; i++){
       if (i>=reverse.length-3){    //pushes 3 last numbers to hundreds array
         hundreds.push(reverse[i])
@@ -26,23 +27,8 @@ function numberToText (num) {
       }
     } 
 
-    // if (hundreds.length == 3 && hundreds[0] == 0){      
-    //     hundreds[0] = ones[hundreds[0]]
-        
-    // }
-    // if (hundreds.length == 3 && hundreds[0] == 1){      // single hundreds case
-    //     hundreds[0] = ones[hundreds[0]] + '' + 'hundred'
-    // } 
-    // if (hundreds.length == 3){                          // multiple hundreds case
-    //     hundreds[0] = ones[hundreds[0]] + '' + 'hundreds'
-    // }
-
-    // if (hundreds.length == 2){
-    //     hundreds[0]
-    // }
-
-
-    for(i=0; i<=hundreds.length-1; i++){   // switching hundreds array for words
+       // switching hundreds array for words
+    for(i=0; i<=hundreds.length-1; i++){   
 
            // switching index 0 (hundreds)
         if(i == hundreds.length-3 && hundreds[i] == 0){         // 0 hundreds case
@@ -58,14 +44,7 @@ function numberToText (num) {
         else if( i == hundreds.length-2 && hundreds[i] != 1){    // switching 20,30,...
             hundreds[i] = tens[hundreds[i]]                      // skiping 10 to 19
         }
-        // else if (i == hundreds.length-1 && hundreds[i-1] ==1){        
-        //     hundreds[i-1] = tens[hundreds[i-1]]                 // '1' switching for ""
-        //     //hundreds[i] =  ones[hundreds[i+10]]
-        //     //.log('test', ones[hundreds[i] ] ) 
-        //     //console.log('test1', ones[hundred[i+10]])
-        //                      
-        // }    
-             // switching index 2 (ones)
+           // switching index 2 (ones)
         else if (i == hundreds.length-1 && hundreds[i-1] !=1){       // switching ones if no '1' before
             hundreds[i] = ones[hundreds[i]]
         }
