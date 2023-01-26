@@ -1,61 +1,66 @@
-// write function that returns the text version of the number.
-// Exp: 310 -> three hundred ten.
+// Write a function that returns the text version of the number.
+// Example: 310 --> three hundred ten.
 // Accepting numbers between zero and one million (exclusive)
 
 function numberToText (num) {
     let ones=['', 'one', 'two', 'three', 'four', 'five', 'six',
              'seven', 'eight', 'nine']
-    let teens = ['ten',' eleven', 'twelve', 'thirteen','fourteen',
+    let teens = ['ten','eleven', 'twelve', 'thirteen','fourteen',
               'fifteen', ' sixteen', 'seventeen', 'eighteen', 'nineteen']
     let tens=['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
     
-    let hundreds=[]
-    let thousands=[]
+    let hundred=[]
+    let thousand=[]
     let million=[]
     let reverse = num.toString()
       
-       // splitting numbers
+    // splitting string with numbers into 3 arrays
     for(i=0; i<=reverse.length-1; i++){
-      if (i>=reverse.length-3){    //pushes 3 last numbers to hundreds array
-        hundreds.push(reverse[i])
+      if (i>=reverse.length-3){    //pushes 3 last numbers to hundred array
+        hundred.push(reverse[i])
       }
-      else if(i<=reverse.length-3 && i>=reverse.length-6){  // pushes 3 next numbers to thousands array
-        thousands.push(reverse[i])
+      else if(i<=reverse.length-3 && i>=reverse.length-6){  // pushes 3 next numbers to thousand array
+        thousand.push(reverse[i])
       }
       else if(i<=reverse.length-6){   // pushes 3 first numbers to million array
         million.push(reverse[i])
       }
     } 
 
-       // switching hundreds array for words
-    for(i=0; i<=hundreds.length-1; i++){   
-
-           // switching index 0 (hundreds)
-        if(i == hundreds.length-3 && hundreds[i] == 0){         // 0 hundreds case
-            hundreds[i] = ones[hundreds[i]]
-        }
-        else if(i== hundreds.length-3  && hundreds[i] == 1){     // single hundreds case
-            hundreds[i] = ones[hundreds[i]] + '' + 'hundred'    
-        }
-        else if (i == hundreds.length-3){                       // multiple hundreds case
-            hundreds[i] = ones[hundreds[i]] + '' + 'hundreds'    
-        } 
+    function translate(array){
+    // switching array elements ('12' --> "twelve")
+        for(i=0; i<=hundred.length-1; i++){   
+            // switching index 0 (hundreds)
+            if(i == array.length-3 && array[i] == 0){           // 0 hundreds case
+                array[i] = ones[array[i]]
+            }
+            else if (i == array.length-3){                       
+                array[i] = ones[array[i]] + ' ' + 'hundred'    
+            } 
             // switching index 1 (tens)
-        else if( i == hundreds.length-2 && hundreds[i] != 1){    // switching 20,30,...
-            hundreds[i] = tens[hundreds[i]]                      // skiping 10 to 19
-        }
-           // switching index 2 (ones)
-        else if (i == hundreds.length-1 && hundreds[i-1] !=1){       // switching ones if no '1' before
-            hundreds[i] = ones[hundreds[i]]
-        }
-        else if (i == hundreds.length-1){             // case if previous (index 1) is '1' 
-            hundreds[i-1] = tens[hundreds[i-1]]       // switching '1' for "" 
-            hundreds[i] =  teens[hundreds[i]]         // switching index 2 for 'teen'
+            else if( i == array.length-2 && array[i] != 1){    // switching 20,30,...
+                array[i] = tens[array[i]]                      // skiping 10 to 19
+            }
+            // switching index 2 (ones)
+            else if (i == array.length-1 && array[i-1] !=1){     // switching if previous (index 1) is not '1'
+                array[i] = ones[array[i]]
+            }
+            else if (i == array.length-1){             // switching if previous (index 1) is '1' 
+                array[i-1] = tens[array[i-1]]          // switching '1' for "" 
+                array[i] =  teens[array[i]]           // switching index 2 for 'teen'
+            }
         }
     }
+    translate(hundred)
+    translate(thousand)
+    translate(million)
 
-   console.log( "h",hundreds)
-   console.log('t', thousands)
-   console.log('m', million) 
+   // combining 3 arrays into string
+   let string = million.concat('million', thousand, "thousand", hundred).toString()
+   let result = string.replace(/,/g, " ") 
+
+   console.log(result)
 }
-numberToText(1234511)
+
+numberToText(12345678)  
+// output :twelve million three hundred forty five thousand six hundred seventy eight
